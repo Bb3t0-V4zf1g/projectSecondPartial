@@ -1,5 +1,7 @@
 //En cada operacion, primero poner el primer digito en la propiedad "acumulate", luego llamar el método a realizar, y poner como argumento el otr numero
 
+
+//Si una fraccion tiene multiplicacion, estos encerrarlo entreparéntesis
 class Calculadora {
     constructor() {
         this.acumulate = 0; //acumular el resultado
@@ -17,11 +19,14 @@ class Calculadora {
         this.acumulate *= num;
     }
     divideBy(num) {
+        console.log(this.acumulate)
         if (num == 0) {
             this.error = true;
             this.message = "No se puede dividir por 0";
         } else {
             this.acumulate = this.acumulate / num;
+            console.log(this.acumulate)
+            console.log(num)
         }
     }
     potencia(num) {
@@ -49,6 +54,18 @@ let ex4 = "4^-3+1/3*4";
 
 let ex5 = "(88x*6)*87+9x*(9-8)(6-1)";
 
+let ecuacionLineal = document.getElementById("ecuacion-lineal");
+
+let buttonLineal = document.getElementById("btn-lineal");
+
+buttonLineal.addEventListener("click",(e)=>{
+    e.preventDefault();
+    const ecuation = ecuacionLineal.value;
+    const result = replaceValues(ecuation, [-2], firstPriority, secondPriority);
+    ecuacionLineal.value = result;
+})
+
+//Arreglos para validaciones
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const symbolsFirstPriority = ["^", "*", "/"];
@@ -56,8 +73,17 @@ const symbolsFirstPriority = ["^", "*", "/"];
 const symbolsSecondPriority = ["+", "-"];
 
 function replaceValues(ex, arrayIncognitas, cb1, cb2) {
+    //Borrar el espacio el blanco
+    let cleanEcuation = "";
+    for(let i = 0; i< ex.length; i++){
+        if(ex[i]=== " "){
+            continue;
+        }else{
+            cleanEcuation += ex[i];
+        }
+    }
     //Separar cada elemento
-    let operation = ex.split("");
+    let operation = cleanEcuation.split("");
     //Guardar la operacion ya con los digitos juntos
     let correctDigits = [];
     //Array alternativo por si hay parentesis
@@ -142,7 +168,7 @@ function replaceValues(ex, arrayIncognitas, cb1, cb2) {
 }
 
 ///LLAMAR FUNCION
-replaceValues(ex5, [5, 4], firstPriority, secondPriority);
+// replaceValues(ex5, [5, 4], firstPriority, secondPriority);
 
 function firstPriority(array) {
     let operation = array;
