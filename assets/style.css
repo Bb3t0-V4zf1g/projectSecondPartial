@@ -12,42 +12,212 @@
 --color11: #33FFCC;
 }
 
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 #calculator{
-    max-width: 90dvw;
-    min-height: 90dvh;
+    width: 97.5dvw;
+    height: 100dvh;
 }
 
 #top{
-    height: 120px;
+    margin-left: -1.25%;
+    width: 102.5%;
+    background-color: var(--color7);
+    height: 10%;
+    transition: all 0.5s ease;
+}
+
+#top:hover{
     background-color: var(--color6);
+    height: 20%;
 }
 
 #top #header{
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    justify-content: center;
+    height: 100%;
+    transition: all 300ms ease;
 }
 
-#top #menu{
-    align-self: flex-end;
-    background-color: var(--color9);
+#title-main{
+    font-size: 2em;
+    color: white;
+}
+
+#nav-web{
+    display: none;
+}
+
+#nav-web li{
+    transition: all 300ms ease;
+    padding: 0 3%;
+}
+
+#nav-web li:hover{
+    box-shadow: 0 0 2px #fff inset;
+}
+
+#nav-web li:hover > p{
+    color: #fff;
+}
+
+#top #nav-web li:hover ul{
+    width: 200px;
+    display: flex;flex-direction: column;
+    list-style: none;
+    position: absolute;
+    padding-left: 0;
+    background-color: #a3b0b1;
+    z-index: 30;
+}
+
+#nav-web li ul {
+    display: none;
+}
+
+#nav-web li ul li{
+    width: 100%;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+    border-top: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 0;
+    transition: all 300ms ease;
+}
+
+#nav-web li ul li p{
+    margin-bottom: 0;
+    padding: 0 1%;
+    transition: all 300ms ease;
 
 }
+
+#nav-web li ul li:first-child{
+    border-top: none;
+}
+
+#nav-web li ul li:hover{
+    border-top: none;
+    transform: translateX(10%) scale(1.1);
+}
+
+#top:hover #nav-web{
+    width: 102.5%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 16px 0 -16px;
+    padding-left: 0;
+}
+
+#top:hover #nav-web li{
+    list-style: none;
+}
+
+#top:hover #nav-web > p{
+    padding: 5% 2%;
+    width: 100%;
+}
+
 
 #middle{
-    min-height: 500px;
+    height: 500px;
+    overflow: hidden;
 }
+
+x
+
+#nav{
+    display: none;
+    background-color: var(--color9);
+    width: 100%;
+    height: 100%;
+    margin-left: -13%
+}
+
+#nav li{
+    list-style-type: none;
+    width: 118%;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+#nav li p{
+    color: white;
+}
+
+#nav li:hover{
+    background-color: var(--color10);
+    transform: translate(15%, 0) scale(1.1);
+}
+
+
+#calculator-container{
+    display: none;
+}
+
 
 #middle #aside{
     background-color: var(--color9);
+    width: 10%;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+
+#aside #nav{
+    display: none;
+    transition: all 0.5s ease;
+}
+
+#middle #aside:hover{
+    width: 25%;
+}
+
+#middle #aside:hover #nav{
+    display: block;
+}
+
+#middle #aside:hover #iconoMenu{
+    animation-name: salida;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+}
+
+#iconoMenu{
+    background-image:url(iconos/menu.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 50px;
+    height: 50px;
+    margin-top: 5%;
+    transition: all 0.5s ease;
 }
 
 #middle #main{
     background-color:#cccc;
 }
 
+
+.button{
+    min-width: 20px;
+    min-height: 30px;
+}
+
 .content{
-    max-height: 300px;
     background-color: var(--color2);
 }
 
@@ -59,4 +229,49 @@
     background-color: var(--color6);
 }
 
+.calcButton{
+    height: 50%;
+    justify-content: center;
+}
 
+#section-table{
+    display: none;
+}
+
+.table-result{
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.5) inset;
+    align-self: start;
+}
+
+.table-header{
+    background-color: var(--color9);
+    color: white;
+    text-align: center;
+    border: #000006 solid;
+}
+
+.table-body{
+    background-color: var(--color10);
+    border: #000006 solid;
+    text-align: center;
+}
+
+.table-result td{
+    border-left: 2px dashed #000006;
+    padding: 5px;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+@keyframes salida {
+    0%{
+        transform: scale(1);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(0.1) rotate(180deg);
+        opacity: 0;
+    }
+}

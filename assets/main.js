@@ -44,25 +44,60 @@ class Calculadora {
 }
 
 const C1 = new Calculadora();
-let ex = "34-5x";
-
-let ex1 = "3x";
-
-let ex3 = "1/3x";
-
-let ex4 = "4^-3+1/3*4";
-
-let ex5 = "(88x*6)*87+9x*(9-8)(6-1)";
 
 let ecuacionLineal = document.getElementById("ecuacion-lineal");
 
+let ecuacionXI = document.getElementById("ecuacion-xi");
+
+let ecuacionXF = document.getElementById("ecuacion-xf");
+
 let buttonLineal = document.getElementById("btn-lineal");
+
+let sectionTable = document.getElementById("section-table");
+
+let containerTable = document.getElementById("container-table");
+
+let selectBiseccion = document.getElementById("select-biseccion");
+
+let selectFalsa = document.getElementById("select-falsa");
+
+let titleCalc = document.getElementById("metodoTitle");
+
+let indice;
+
+selectBiseccion.addEventListener("click", (e) => {
+    e.preventDefault();
+    let calculatorContainer = document.getElementById("calculator-container");
+    calculatorContainer.style.display = "block";
+    titleCalc.textContent = "Biseccion";
+    indice = 1;
+});
+
+selectFalsa.addEventListener("click", (e) => {
+    e.preventDefault();
+    let calculatorContainer = document.getElementById("calculator-container");
+    calculatorContainer.style.display = "block";
+    titleCalc.textContent = "Regla Falsa";
+    indice = 2;
+});
 
 buttonLineal.addEventListener("click",(e)=>{
     e.preventDefault();
+    //Obtener valores
     const ecuation = ecuacionLineal.value;
-    const result = replaceValues(ecuation, [-2], firstPriority, secondPriority);
-    ecuacionLineal.value = result;
+    //Convertirlo a numero
+    const xI = parseFloat(ecuacionXI.value);
+    const xF = parseFloat(ecuacionXF.value);
+
+    //Aparecer tabla
+    sectionTable.style.display = "block";
+    //Hacer formula y según el numero se adapta
+    if(indice === 1){
+        formIntegracion(ecuation, xI, xF, indice);
+    }
+    if(indice === 2){
+        formIntegracion(ecuation, xI, xF, indice);
+    }
 })
 
 //Arreglos para validaciones
@@ -72,7 +107,7 @@ const symbolsFirstPriority = ["^", "*", "/"];
 
 const symbolsSecondPriority = ["+", "-"];
 
-function replaceValues(ex, arrayIncognitas, cb1, cb2) {
+function replaceValues(ex, incognitaXarray, cb1, cb2) {
     //Borrar el espacio el blanco
     let cleanEcuation = "";
     for(let i = 0; i< ex.length; i++){
@@ -101,7 +136,7 @@ function replaceValues(ex, arrayIncognitas, cb1, cb2) {
             correctDigits.push(digits.toString());
             //reemplazar las x
         } else if (item == "x") {
-            item = arrayIncognitas[0].toString();
+            item = incognitaXarray.toString();
             //Condicion para la multiplicacion con una variable
             if (numbers.includes(operation[beforeIndex])) {
                 //Agregar signo multipliacion
@@ -163,12 +198,8 @@ function replaceValues(ex, arrayIncognitas, cb1, cb2) {
     //Hacer operaciones de segunda prioridad
     let secondStepOriginal = secondPriority(firstStepOriginal);
     //Resultado final
-    console.log(`f(x)= ${secondStepOriginal.toString()}`);
     return secondStepOriginal; //////////////
 }
-
-///LLAMAR FUNCION
-// replaceValues(ex5, [5, 4], firstPriority, secondPriority);
 
 function firstPriority(array) {
     let operation = array;
@@ -178,22 +209,22 @@ function firstPriority(array) {
         operation.includes("/") ||
         operation.includes("^")
     ) {
+        while(operation.includes("^")) {
+            let index = operation.indexOf("^");
+            C1.acumulate = parseFloat(operation[index - 1]);
+            //Potencia negativa o positiva
+            if (operation[index + 1] == "-") {
+                C1.potencia(operation[index + 1] + operation[index + 2]);
+                //Quitar los valores ya operados
+                operation.splice(index - 1, 4, C1.acumulate);
+            } else {
+                C1.potencia(parseFloat(operation[index + 1]));
+                //Quitar los valores ya operados
+                operation.splice(index - 1, 3, C1.acumulate);
+            }
+        }
         for (let i = 0; i < operation.length; i++) {
             //Potencia
-            if (operation[i] === "^") {
-                let index = operation.indexOf("^");
-                C1.acumulate = parseFloat(operation[index - 1]);
-                //Potencia negativa o positiva
-                if (operation[index + 1] == "-") {
-                    C1.potencia(operation[index + 1] + operation[index + 2]);
-                    //Quitar los valores ya operados
-                    operation.splice(index - 1, 4, C1.acumulate);
-                } else {
-                    C1.potencia(parseFloat(operation[index + 1]));
-                    //Quitar los valores ya operados
-                    operation.splice(index - 1, 3, C1.acumulate);
-                }
-            }
             //Division
             if (operation[i] === "/") {
                 let index = operation.indexOf("/");
@@ -246,5 +277,98 @@ function secondPriority(array) {
             }
         }
     }
+    //Retornar na operacion final
     return operation;
 }
+
+//FORMULAS
+function formIntegracion(ecuation, xI, xF, form){
+    let errorRelativo = 100;
+    let iteration = 1;//reflejar en la tabla
+    let variableXI = xI;//reflejar tabla
+    let variableXF = xF;//reflejar tabla
+    let xM;//reflejar en la tabla
+    let beforeXM = xM;
+    let fxI;
+    let fxF;
+    let fxM;
+    //Crear tabla
+    const createTable = document.createElement("TABLE");
+    //Crear encabezado de la tabla
+    let fisrtRow = createTable.insertRow(0);
+    fisrtRow.setAttribute("class", "table-header");
+    fisrtRow.insertCell(0).textContent = "Iteración";
+    fisrtRow.insertCell(1).textContent = "Xi";
+    fisrtRow.insertCell(2).textContent = "Xf";
+    fisrtRow.insertCell(3).textContent = "Xm";
+    fisrtRow.insertCell(4).textContent = "Error Relativo";
+            //Ponerle una clase a la primera fila
+    createTable.setAttribute("class", "table-result");
+
+
+    //Ciclo para hacer las iteraciones y operaciones
+    do{
+    //Averguar cual variable reemplazar
+    console.log("-------------------"+ iteration + "-------------------");
+    //Determinar funciones de xI, xF
+    fxI = replaceValues(ecuation, [variableXI], firstPriority, secondPriority);
+    fxF = replaceValues(ecuation, [variableXF], firstPriority, secondPriority);
+    console.log(fxI);
+    console.log(fxF);
+    console.log(variableXI);
+    console.log(variableXF);
+    //Guardar el valor de xM anterior
+    beforeXM = xM;
+    //Determinar xM
+    if(form == 1){
+        //Biseccion
+        //Xm con solo 6 decimanles
+        xM = ((parseFloat(variableXI) + parseFloat(variableXF))/2).toFixed(6);
+    }
+    if( form == 2){
+        //Regla Falsa
+        //Xm con solo 6 decimanles
+        xM = (variableXF-(fxF*(parseFloat(variableXF)-parseFloat(variableXI))/(fxF-fxI))).toFixed(6);
+    }
+    console.log(xM);
+    //Determinar f(xM)
+    fxM = replaceValues(ecuation, [xM], firstPriority, secondPriority);
+    console.log(fxM);
+    
+
+//Crear fila de tabla antes de hacer la validación de cual variable cambiar
+let rowTable = createTable.insertRow();
+rowTable.setAttribute("class", "table-body");
+rowTable.insertCell(0).textContent = iteration;
+rowTable.insertCell(1).textContent = variableXI;
+rowTable.insertCell(2).textContent = variableXF;
+rowTable.insertCell(3).textContent = xM;
+
+//Porque la primera iteración no tiene error relativo
+if(iteration>1){
+    errorRelativo = (Math.abs((xM-beforeXM)/xM)*100).toFixed(2);
+    rowTable.insertCell(4).textContent = `${errorRelativo}%`;
+}else{
+    rowTable.insertCell(4).textContent = "-";
+}
+//Cambiar variables
+    if(fxI*fxM<0){
+        variableXF = xM;
+        console.log("cambioXF");
+    }
+    if(fxF*fxM<0){
+        variableXI = xM;
+        console.log("cambioXI");
+    }
+    iteration++;
+    //condicion para seguir iterando
+    }while(errorRelativo >= 1)
+
+
+    //Limpiar contenido del contenedor
+    containerTable.innerHTML = "";
+    //Agregar tabla al contenedor
+    containerTable.appendChild(createTable);
+}
+
+///CREATE A FUNCTION WHERE YOU CAN CHOOSE WHAT TYPE OF METHOD YOU WANT USE, EXMAPLE: BEETWEEN FALSE RULE OR BISECTION 

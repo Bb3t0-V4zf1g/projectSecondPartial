@@ -9,51 +9,147 @@
 </head>
 <body>
     <div id="layout">
-        <div id="calculator" class="container border mx-auto my-2">
-            <div id="top" class="row border">
-                <header id="header" class="col-12 p-2 ml-3 justify-content-center">
-                    <h2>Calculate</h2>
+        <div id="calculator" class="mx-auto">
+            <div id="top" class="">
+                <header id="header" class="border">
+                    <h2 id="title-main">Calculate</h2>
+                    <ul id="nav-web"class="border">
+                        <li><p class="text-center">Definiciones</p>
+                        <ul>
+                            <li><p class="text-center" >Métodos Numéricos</p></li>
+                            <li><p class="text-center" >Ecuaciones Lineales</p></li>
+                            <li><p class="text-center" >Métodos para resolver ecuacioones lineales</p></li>
+                            <li><p class="text-center" >Ecuaciones no lineales</p></li>
+                            <li><p class="text-center" >Métodos para resolver ecuaciones no lineales</p></li>
+                        </ul>
+                        </li>
+                        <li><p class="text-center" >Calculadora</p>
+                        </li>
+                        <li><p class="text-center">Infografías</p>
+                        <ul id="infografia">
+                            <li><p class="text-center">Infografía de Ciro</p></li>
+                            <li><p class="text-center">Infografía de Beto</p></li>
+                        </ul></li>
+                        <li><p class="text-center">Configuraciones</p></li>
+                    </ul>
                 </header>
-                <nav id="menu" class="col-12 border">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                      </ul>
-                </nav>
             </div>
             <div id="middle" class="row border">
-                <aside id="aside" class="py-3 col-4 text-center border">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur itaque esse unde consequatur dolorum omnis officiis repellat, impedit dolore repudiandae fugiat eveniet aspernatur porro possimus asperiores nihil alias architecto nemo.</p>
+                <aside id="aside" class="text-center border">
+                    <div id="iconoMenu"></div>
+                    <ul id="nav" class="">
+                        <li id="select-biseccion" ><p class="text-center">Método Bisección</p></li>
+                        <li id="select-falsa"><p class="text-center" >Método Regla Falsa</p></li>
+                    </ul>
                 </aside>
-                <main id="main" class="col-8 border d-flex justify-content-center p-2">
-                    <section class="content row col-12  p-2">
-                        <article class="article border">
-                            <h3 class="col-12">Calcular</h3>
-                            <form action="">
-                                <div class="input-group mb-3">
-                                    <input id="ecuacion-lineal" type="text" class="form-control" aria-label="Text input">
-                                  </div>
-                                <div class="d-grid gap-2">
-                                        <button
-                                        id="btn-lineal"
-                                            type="button"
-                                            name=""
-                                            id=""
-                                            class="btn btn-primary">Calcular
-                                        </button>
-                                  </div>
-                            </form>
+                <!--Calculadora-->
+                <main id="main" class="col border"> <section id="calculator-container" class="col-6">
+                    <article  class="article border p-3 col-12">
+                        <h3 class="col-12 text-center">Calcular</h3>
+                        <h5 id="metodoTitle" class="col-12 text-center"></h5>
+                        <form action="" class="d-flex flex-column px-2">
+                            <div class="mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control col-12 text-center"
+                                    id="ecuacion-lineal"
+                                    placeholder="Funcion no lineal"
+                                />
+                            </div>
+                                    <div class="input-group mb-3">
+                                        <input id="ecuacion-xi" type="text" class="form-control col-6 text-center" aria-label="Text input"
+                                        placeholder="Valor xi">
+                                        <input id="ecuacion-xf" type="text" class="form-control col-6 text-center" aria-label="Text input"
+                                        placeholder="Valor xF">
+                                </div>
+                            <div class="d-grid gap-2">
+                                    <button
+                                    id="btn-lineal"
+                                        type="button"
+                                        name=""
+                                        id=""
+                                        class="btn btn-primary">Calcular
+                                    </button>
+                            </div>
+                        </form>
+                    </article>
+                    <article class="col-12 calcButton p-2">
+                        <div class="row">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary col button">1
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary col button">2
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary col button">3
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary col button">+
+                                </button>
+                            </div>
+                        <div class="row">
+                            <button
+                            type="button"
+                            class="btn btn-primary col button">4
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">5
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">6
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">-
+                        </button>
+                        </div>
+                        <div class="row">
+                            <button
+                            type="button"
+                            class="btn btn-primary col button">7
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">8
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">9
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">^
+                        </button>
+                        </div>
+                        <div class="row">
+                            <button
+                            type="button"
+                            class="btn btn-primary col button">/
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">0
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">*
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary col button">=
+                        </button>
+                            </div>
                         </article>
+                </section>
+                    <section id="section-table" class="col-6 row p-3">
+                        <div id="container-table" ></div>
                     </section>
                 </main>
             </div>
@@ -65,6 +161,7 @@
                         <h3 class="border">Ciro</h3>
                     </div>
                 </footer>
+   
             </div>
         </div>
     </div>
