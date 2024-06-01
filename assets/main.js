@@ -1,4 +1,4 @@
-//En cada operacion, primero poner el primer digito en la propiedad "acumulate", luego llamar el método a realizar, y poner como argumento el otr numero
+//En cada operacion, primero poner el primer digito en la propiedad "acumulate", luego llamar el método a realizar, y poner como argumento el otro numero
 
 
 //Si una fraccion tiene multiplicacion, estos encerrarlo entreparéntesis
@@ -332,7 +332,7 @@ function secondPriority(array) {
 
 //FORMULAS
 function formIntegracion(ecuation, xI, xF, form){
-    let errorRelativo = 100;
+    let errorRelativo = 1000;
     let iteration = 1;//reflejar en la tabla
     let variableXI = xI;//reflejar tabla
     let variableXF = xF;//reflejar tabla
@@ -394,7 +394,10 @@ rowTable.insertCell(2).textContent = variableXF;
 rowTable.insertCell(3).textContent = xM;
 
 //Porque la primera iteración no tiene error relativo
-if(iteration>1){
+if(xM == 0){
+    rowTable.insertCell(4).textContent = `0%`;//Porque ya es exacto
+    break
+}else if(iteration>1){
     errorRelativo = (Math.abs((xM-beforeXM)/xM)*100).toFixed(2);
     rowTable.insertCell(4).textContent = `${errorRelativo}%`;
 }else{
@@ -419,5 +422,3 @@ if(iteration>1){
     //Agregar tabla al contenedor
     containerTable.appendChild(createTable);
 }
-
-///CREATE A FUNCTION WHERE YOU CAN CHOOSE WHAT TYPE OF METHOD YOU WANT USE, EXMAPLE: BEETWEEN FALSE RULE OR BISECTION 
