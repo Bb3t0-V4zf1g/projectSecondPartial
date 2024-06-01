@@ -11,9 +11,9 @@
     <div id="layout">
         <div id="calculator" class="mx-auto">
             <div id="top" class="">
-                <header id="header" class="border">
+                <header id="header">
                     <h2 id="title-main">Calculate</h2>
-                    <ul id="nav-web"class="border">
+                    <ul id="nav-web">
                         <li><p class="text-center">Definiciones</p>
                         <ul>
                             <li><p class="text-center" >Métodos Numéricos</p></li>
@@ -23,36 +23,46 @@
                             <li><p class="text-center" >Métodos para resolver ecuaciones no lineales</p></li>
                         </ul>
                         </li>
-                        <li><p class="text-center" >Calculadora</p>
+                        <li id="btn-calculator"><p class="text-center" >Calculadora</p>
                         </li>
                         <li><p class="text-center">Infografías</p>
                         <ul id="infografia">
-                            <li><p class="text-center">Infografía de Ciro</p></li>
-                            <li><p class="text-center">Infografía de Beto</p></li>
+                            <li id="infografia-Salvador"><p class="text-center">Infografía de Ciro</p></li>
+                            <li id="infografia-Alberto"><p class="text-center">Infografía de Beto</p></li>
                         </ul></li>
-                        <li><p class="text-center">Configuraciones</p></li>
+                        <li><p class="text-center">Acerca de nosotros</p></li>
                     </ul>
                 </header>
             </div>
             <div id="middle" class="row border">
                 <aside id="aside" class="text-center border">
-                    <div id="iconoMenu"></div>
+                    <div id="textMenu"><p>
+                        Mouse aquí
+                    </p></div>
                     <ul id="nav" class="">
                         <li id="select-biseccion" ><p class="text-center">Método Bisección</p></li>
                         <li id="select-falsa"><p class="text-center" >Método Regla Falsa</p></li>
                     </ul>
                 </aside>
                 <!--Calculadora-->
-                <main id="main" class="col border"> <section id="calculator-container" class="col-6">
-                    <article  class="article border p-3 col-12">
-                        <h3 class="col-12 text-center">Calcular</h3>
+                <main id="main" class="col">
+                    <section id="metodosNumericos" class="d-none">
+                        <article class="subtitle what">
+                            <h2 class="text-center">TOPIC 1</h2>
+
+                        </article>
+                    </section>
+                    
+                    <section id="calculator-container" class="col-6">
+                    <article  class="article p-3 col-12">
+                        <h3 id="calcular-title" class="col-12 text-center">Calcular</h3>
                         <h5 id="metodoTitle" class="col-12 text-center"></h5>
                         <form action="" class="d-flex flex-column px-2">
                             <div class="mb-3">
                                 <input
                                     type="text"
                                     class="form-control col-12 text-center"
-                                    id="ecuacion-lineal"
+                                    id="ecuacion-resolver"
                                     placeholder="Funcion no lineal"
                                 />
                             </div>
@@ -155,10 +165,10 @@
             </div>
             <div id="bottom">
                 <footer id="footer" class="row align-items-center">
-                    <h2 class="col border">Calculator</h2>
-                    <div id="integers" class="col border">
-                        <h3 class="border">Alberto</h3>
-                        <h3 class="border">Ciro</h3>
+                    <div id="integers" class="col">
+                        <h3>&copy UmizumiDevs</h3>
+                        <h5>Garibay Solorzano Salvador</h5>
+                        <h5>Vazquez Figueroa Alberto</h5>
                     </div>
                 </footer>
    

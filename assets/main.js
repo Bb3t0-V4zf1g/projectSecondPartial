@@ -45,34 +45,59 @@ class Calculadora {
 
 const C1 = new Calculadora();
 
-let ecuacionLineal = document.getElementById("ecuacion-lineal");
+//Escoger elementos del DOM
+//Cambiar main
+let mainContent = document.getElementById("main");
 
+//Section dentro del main
+let calculatorContainer = document.getElementById("calculator-container");
+
+//Eleccion para usar calculadora
+let btnCalculator = document.getElementById("btn-calculator");
+
+let btnInfografiaSalvador = document.getElementById("infografia-Salvador");
+
+let  btnInfografiaAlberto = document.getElementById("infografia-Alberto");
+
+//Obtener la ecuacion
+let ecuacionLineal = document.getElementById("ecuacion-resolver");
+
+//Obtener los valores de xI y xF
 let ecuacionXI = document.getElementById("ecuacion-xi");
-
 let ecuacionXF = document.getElementById("ecuacion-xf");
 
+//Boton para hacer la operacion
 let buttonLineal = document.getElementById("btn-lineal");
 
+//Seccion de la tabla dentro del main
 let sectionTable = document.getElementById("section-table");
-
 let containerTable = document.getElementById("container-table");
 
+//Seleccionar el metodo biseccion
 let selectBiseccion = document.getElementById("select-biseccion");
 
+//Seleccionar el metodo regla falsa
 let selectFalsa = document.getElementById("select-falsa");
 
+//Titulo del metodo
 let titleCalc = document.getElementById("metodoTitle");
 
+//Aside
+let aside = document.getElementById("aside");
+
+//Variable para saber que metodo se seleccionó
 let indice;
 
+//Evento para mostrar la calculadora y ocultar el contenido principal
 selectBiseccion.addEventListener("click", (e) => {
     e.preventDefault();
-    let calculatorContainer = document.getElementById("calculator-container");
+
     calculatorContainer.style.display = "block";
     titleCalc.textContent = "Biseccion";
     indice = 1;
 });
 
+//Evento para mostrar la calculadora y ocultar el contenido principal
 selectFalsa.addEventListener("click", (e) => {
     e.preventDefault();
     let calculatorContainer = document.getElementById("calculator-container");
@@ -81,6 +106,7 @@ selectFalsa.addEventListener("click", (e) => {
     indice = 2;
 });
 
+//Evento para resolver la ecuacion
 buttonLineal.addEventListener("click",(e)=>{
     e.preventDefault();
     //Obtener valores
@@ -99,6 +125,29 @@ buttonLineal.addEventListener("click",(e)=>{
         formIntegracion(ecuation, xI, xF, indice);
     }
 })
+
+btnCalculator.addEventListener("click", (e) => {
+    aside.style.display = "flex";
+});
+
+//Evento para mostrar la infografia de Salvador
+btnInfografiaSalvador.addEventListener("click", (e) => {
+    aside.style.display = "none";
+    calculatorContainer.style.display = "none";
+    sectionTable.style.display = "none";
+/////////////////////////////////////
+})
+
+//Evento para mostrar la infografia de Alberto
+btnInfografiaAlberto.addEventListener("click", (e) => {
+    aside.style.display = "none";
+    aside.style.display = "none";
+    calculatorContainer.style.display = "none";
+    sectionTable.style.display = "none";
+/////////////////////////////////////
+})
+
+
 
 //Arreglos para validaciones
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];

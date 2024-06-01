@@ -1,15 +1,13 @@
 :root{
---color1:#000006;
---color2: #002d4d;
---color3: #00649f;
---color4: #00a5fd;
---color5: #00f0ff;
---color6:#3366FF;
---color7: #3399FF;
---color8: #33CCFF;
---color9: #3399CC;
---color10 : #33CCCC;
---color11: #33FFCC;
+--color-naranja-cafe-bajo:#C8725B;
+--color-naranja-cafe-fuerte: #B3513C;
+--color-beige-amarillento: #DEC19B;
+--color-azul-dino: #9CDED4;
+--color-verde-dino-bajo: #C6ECCF;
+--color-verde-dino:#60CA92;
+--color-rosa-piel: #EBCBC2;
+--color-piel-fuerte: #D29879;
+
 }
 
 #main{
@@ -27,13 +25,13 @@
 #top{
     margin-left: -1.25%;
     width: 102.5%;
-    background-color: var(--color7);
+    background-color: var(--color-naranja-cafe-fuerte);
     height: 10%;
     transition: all 0.5s ease;
 }
 
 #top:hover{
-    background-color: var(--color6);
+    background-color: var(--color-naranja-cafe-bajo);
     height: 20%;
 }
 
@@ -49,9 +47,52 @@
 #title-main{
     font-size: 2em;
     color: white;
+    text-shadow: 0 2px 4px #000006;
 }
 
+
+#calcular-title,
+#metodoTitle{
+    color: var(--color-naranja-cafe-fuerte);
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#btn-lineal{
+    background-color: var(--color-piel-fuerte);
+
+    color: white;
+    border: none;
+    padding: 1%;
+    margin: 1%;
+    transition: all 300ms ease;
+}
+
+#btn-lineal:hover{
+    background-color: var(--color-piel-fuerte);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px  var(--color-naranja-cafe-bajo), 0 2px 4px  var(--color-naranja-cafe-bajo), 1px 2px 4px  var(--color-naranja-cafe-bajo), 2px 4px 8px  var(--color-naranja-cafe-bajo) ;
+}
+
+#btn-lineal:active{
+    background-color: var(--color-piel-fuerte);
+    transform: scale(1);
+    box-shadow: 0 0 10px  var(--color-naranja-cafe-bajo), 0 2px 4px  var(--color-naranja-cafe-bajo), 1px 2px 4px  var(--color-naranja-cafe-bajo), 2px 4px 8px  var(--color-naranja-cafe-bajo) inset;
+}
+
+.calcButton button{
+    background-color: var(--color-naranja-cafe-fuerte);
+    color: white;
+    border: none;
+    padding: 1%;
+    margin: 1%;
+    transition: all 300ms ease;
+}
+
+
 #nav-web{
+    background-color: var(--color-beige-amarillento);
+    box-shadow: 0 0 10px  var(--color-naranja-cafe-bajo), 0 0 10px  var(--color-naranja-cafe-bajo), 0 0 15px  var(--color-naranja-cafe-bajo), 0 0 20px  var(--color-naranja-cafe-bajo) inset;
     display: none;
 }
 
@@ -61,20 +102,35 @@
 }
 
 #nav-web li:hover{
-    box-shadow: 0 0 2px #fff inset;
+    box-shadow: 0 0 2px var(--color-naranja-cafe-fuerte), 0 0 2px var(--color-naranja-cafe-fuerte), 0 0 2px var(--color-naranja-cafe-fuerte), 0 0 2px var(--color-naranja-cafe-fuerte) inset;
+    transform: scale(1.1);
+    background-color: var(--color-naranja-cafe-fuerte);
+
+}
+
+#nav-web li p{
+    color: var(--color-naranja-cafe-fuerte);
+    font-weight: 600;
+    transition: all 300ms ease;
+
 }
 
 #nav-web li:hover > p{
     color: #fff;
+    text-shadow: 0 2px 4px #000006;
+    animation-name: entrada;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
 }
 
 #top #nav-web li:hover ul{
     width: 200px;
-    display: flex;flex-direction: column;
+    display: flex;
+    flex-direction: column;
     list-style: none;
     position: absolute;
     padding-left: 0;
-    background-color: #a3b0b1;
+    background-color: var(--color-beige-amarillento);
     z-index: 30;
 }
 
@@ -108,6 +164,12 @@
 #nav-web li ul li:hover{
     border-top: none;
     transform: translateX(10%) scale(1.1);
+    background-color: var(--color-naranja-cafe-fuerte);
+}
+
+#nav-web li ul li:hover p{
+    color: #fff;
+    text-shadow: 0 2px 4px #000006;
 }
 
 #top:hover #nav-web{
@@ -138,7 +200,6 @@ x
 
 #nav{
     display: none;
-    background-color: var(--color9);
     width: 100%;
     height: 100%;
     margin-left: -13%
@@ -153,27 +214,40 @@ x
 }
 
 #nav li p{
-    color: white;
+    color: var(--color-naranja-cafe-fuerte);
+    font-weight: bold;
+    transition: all 0.5s ease;
 }
 
 #nav li:hover{
-    background-color: var(--color10);
+    background-color:#30cd35c8;
     transform: translate(15%, 0) scale(1.1);
+}
+
+#nav li:hover p{
+    color: var(--color-azul-dino);
+    text-shadow: 0 1px 1px #fff, 0 2px 2px #000006;
 }
 
 
 #calculator-container{
+    height: 95%;
     display: none;
+    transition: all 0.5s ease;
+    border: none;
+    box-shadow: 0 0 10px  rgba(0, 0, 0, 0.5), 0 2px 10px  rgba(0, 0, 0, 0.5), 0 4px 8px  rgba(0, 0, 0, 0.5), 0 6px 8px  rgba(0, 0, 0, 0.5) ;
+    padding: 1%;
 }
 
 
 #middle #aside{
-    background-color: var(--color9);
+    background-color: var(--color-azul-dino);
     width: 10%;
     transition: all 0.5s ease;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     transition: all 0.5s ease;
 }
 
@@ -185,23 +259,27 @@ x
 
 #middle #aside:hover{
     width: 25%;
+    justify-content: start;
+    background-color: var(--color-verde-dino);
 }
 
 #middle #aside:hover #nav{
     display: block;
 }
 
-#middle #aside:hover #iconoMenu{
-    animation-name: salida;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
+#middle #aside:hover #textMenu{
+    display: none;
 }
 
-#iconoMenu{
-    background-image:url(iconos/menu.png);
-    background-repeat: no-repeat;
+#textMenu{
+    justify-self: flex-end;
+    font-size: 34px;
+    color: var(--color-verde-dino);
+    font-weight: 600;
+    text-shadow: 0 1px 1px #000006, 0 2px 2px var(--color-verde-dino-bajo),0 1px 1px #000006, 0 2px 2px var(--color-verde-dino-bajo) ;
+    transform: rotate(-90deg);
     background-size: 100%;
-    width: 50px;
+    width: 500px;
     height: 50px;
     margin-top: 5%;
     transition: all 0.5s ease;
@@ -217,16 +295,42 @@ x
     min-height: 30px;
 }
 
-.content{
-    background-color: var(--color2);
+section:first-child{
+    background-image: linear-gradient(90deg, var(--color-azul-dino), var(--color-verde-dino));
 }
 
 .article{
-    background-color: var(--color11);
+    background-color: transparent;
 }
 
 #footer{
-    background-color: var(--color6);
+    background-color: var(--color-verde-dino);
+}
+
+#footer #integers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+}
+
+#footer #integers h3,
+#footer #integers h5{
+    color: var(--color-naranja-cafe-fuerte);
+    text-shadow: 0 1px 2px #000006;
+    font-weight: bold;
+    transition: all 300ms ease;
+}
+
+#footer #integers h3:hover{
+    color: var(--color-naranja-cafe-bajo);
+    text-shadow: 0 2px 1px #fff;
+}
+
+#footer #integers h5:hover{
+    color: var(--color-naranja-cafe-bajo);
+    text-shadow: 0 2px 1px #fff;
+
 }
 
 .calcButton{
@@ -239,9 +343,10 @@ x
 }
 
 .table-result{
+    border: none;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 0 10px  rgba(0, 0, 0, 0.5), 0 2px 10px  rgba(0, 0, 0, 0.5), 0 4px 10px  rgba(0, 0, 0, 0.5), 0 6px 10px  rgba(0, 0, 0, 0.5) inset;
     align-self: start;
 }
 
@@ -263,15 +368,36 @@ x
     padding: 5px;
     padding-bottom: 10px;
     font-size: 14px;
+    transition: all 300ms ease;
 }
 
-@keyframes salida {
+.table-result td:hover{
+    background-color: var(--color11);
+    color: white;
+    transform: scale(1.1);
+    animation-name: entradaArriba;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes entrada {
     0%{
-        transform: scale(1);
-        opacity: 1;
+        transform: translate(-100%, 0);
+        opacity: 0;
     }
     100%{
-        transform: scale(0.1) rotate(180deg);
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaArriba {
+    0%{
+        transform: translate(0, 0);
         opacity: 0;
+    }
+    100%{
+        transform: translate(0, -5%);
+        opacity: 1;
     }
 }
