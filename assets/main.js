@@ -45,6 +45,11 @@ class Calculadora {
 
 const C1 = new Calculadora();
 
+//Arreglos para validaciones
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const symbolsFirstPriority = ["^", "*", "/"];
+const symbolsSecondPriority = ["+", "-"];
+
 //Escoger elementos del DOM
 //Cambiar main
 let mainContent = document.getElementById("main");
@@ -60,7 +65,7 @@ let btnInfografiaSalvador = document.getElementById("infografia-Salvador");
 let  btnInfografiaAlberto = document.getElementById("infografia-Alberto");
 
 //Obtener la ecuacion
-let ecuacionLineal = document.getElementById("ecuacion-resolver");
+let inputEcuacion = document.getElementById("ecuacion-resolver");
 
 //Obtener los valores de xI y xF
 let ecuacionXI = document.getElementById("ecuacion-xi");
@@ -110,11 +115,24 @@ selectFalsa.addEventListener("click", (e) => {
 buttonLineal.addEventListener("click",(e)=>{
     e.preventDefault();
     //Obtener valores
-    const ecuation = ecuacionLineal.value;
+    const ecuation = inputEcuacion.value;
     //Convertirlo a numero
     const xI = parseFloat(ecuacionXI.value);
     const xF = parseFloat(ecuacionXF.value);
-
+    //Validar que no esten vacios
+    if(ecuation === ""){
+        alert("No se puede resolver la ecuacion sin valores");
+        return;
+    }else if(ecuacionXI.value === "" || ecuacionXF.value === ""){
+        alert("No se puede resolver la ecuacion sin valores de xI y xF");
+        return;
+    }else if(isNaN(xI)){
+        alert("El valor de xI no es un número");
+        return;
+    }else if(isNaN(xF)){
+        alert("El valor de xF no es un número");
+        return;
+    }else{
     //Aparecer tabla
     sectionTable.style.display = "block";
     //Hacer formula y según el numero se adapta
@@ -124,6 +142,7 @@ buttonLineal.addEventListener("click",(e)=>{
     if(indice === 2){
         formIntegracion(ecuation, xI, xF, indice);
     }
+    };
 })
 
 btnCalculator.addEventListener("click", (e) => {
@@ -146,15 +165,6 @@ btnInfografiaAlberto.addEventListener("click", (e) => {
     sectionTable.style.display = "none";
 /////////////////////////////////////
 })
-
-
-
-//Arreglos para validaciones
-const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-const symbolsFirstPriority = ["^", "*", "/"];
-
-const symbolsSecondPriority = ["+", "-"];
 
 function replaceValues(ex, incognitaXarray, cb1, cb2) {
     //Borrar el espacio el blanco
@@ -422,3 +432,55 @@ if(xM == 0){
     //Agregar tabla al contenedor
     containerTable.appendChild(createTable);
 }
+
+//Obtener botones del DOM
+let buttonsCalcular = document.querySelectorAll(".calcButton .btn");
+
+//Evento para el input de la ecuacion
+let focusEcuacion = 0;
+inputEcuacion.addEventListener("click", ()=>{
+    focusEcuacion =  0;//El focus esta en este input de ecuacion
+});
+
+//Evento para el input de xf de la ecuacion
+ecuacionXF.addEventListener("click", ()=>{
+    focusEcuacion = 2;//El focus esta en este input de xF
+});
+
+//Evento para el input de xi de la ecuacion
+ecuacionXI.addEventListener("click", ()=>{
+    focusEcuacion = 1;//El focus esta en este input de xi
+});
+
+
+buttonsCalcular.forEach((button) => {
+    //Poner el evento click a cada uno
+    button.addEventListener("click", ()=>{
+        if(button.textContent.trim() === "C"){
+            if(focusEcuacion === 2){
+                ecuacionXF.value = "";
+            }else if(focusEcuacion === 1){
+                ecuacionXI.value = "";
+            }else{
+                inputEcuacion.value = "";
+            }
+        }else if(button.textContent.trim() === "<="){
+            if(focusEcuacion === 2){
+                ecuacionXF.value = ecuacionXF.value.slice(0, -1);
+            }else if(focusEcuacion === 1){
+                ecuacionXI.value = ecuacionXI.value.slice(0, -1);
+            }else{
+            inputEcuacion.value = inputEcuacion.value.slice(0, -1);            
+            }
+        }else{
+            if(focusEcuacion === 2){
+                ecuacionXF.value+= button.textContent.trim();   
+            }else if(focusEcuacion === 1){
+                ecuacionXI.value += button.textContent.trim();   
+            }else{
+                inputEcuacion.value += button.textContent.trim();           
+            }
+        }    
+    })
+})
+

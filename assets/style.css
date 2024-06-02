@@ -191,7 +191,7 @@
 
 
 #middle{
-    min-height: 500px;
+    height: 100%;
 }
 
 x
@@ -205,11 +205,11 @@ x
 
 #nav li{
     list-style-type: none;
-    width: 118%;
+    width: 100%;
     padding: 10px;
     text-align: center;
     transition: all 0.5s ease;
-    box-shadow: -4px 1px 2px  rgba(0, 0, 0, 0.5);
+    box-shadow: -4px 0 2px  rgba(0, 0, 0, 0.5);
     background-color: transparent;
 }
 
@@ -231,7 +231,7 @@ x
 
 
 #calculator-container{
-    height: 95%;
+    height: min-content;
     display: none;
     transition: all 0.5s ease;
     border: none;
@@ -256,6 +256,7 @@ x
 #aside #nav{
     display: none;
     transition: all 0.5s ease;
+    width: 100%;
 }
 
 #middle #aside:hover{
